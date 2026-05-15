@@ -1,6 +1,6 @@
 import express from "express";
 
-//cerate an express app
+//create an express app
 const app = express();
 
 app.use(express.json())
