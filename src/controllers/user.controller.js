@@ -57,21 +57,23 @@ const loginUser = async (req, res) => {
     })
 
     if (!user) {
-      res.status(400).json({
+      return res.status(400).json({
         message:"User not found"
       })
     }
 
     //compare password
     const isMatch = await user.comparePassword(password);
-    if(!isMatch) return res.status(400).json({
+    
+    if (!isMatch) {
+      return res.status(400).json({
       message: "Invalid credentials"
-    })
+    })}
 
     res.status(200).json({
       message: "User Logged in",
       user: {
-        id: iser._id,
+        id: user._id,
         email: user.email,
         username: user.username,
       }
@@ -79,7 +81,7 @@ const loginUser = async (req, res) => {
 
   } catch (error) {
     res.status(500).json({
-      messgae: "Internal Server Error"
+      message: "Internal Server Error"
     })
   }
 }
